@@ -1,3 +1,13 @@
+<?php 
+    session_start();
+    if( isset($_SESSION['user']) != "Mestrella" ){
+        header("location:session.php");
+    }
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
