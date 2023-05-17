@@ -1,3 +1,19 @@
+<?php 
+
+    if($_POST){ 
+
+        if( ( $_POST['user']=="Mestrella" ) && ( $_POST['password']=="123456" ) ) {
+
+           header("location:index.php");
+        }
+        else{
+            echo "<script> alert('User or password incorrect'); </script>";
+        }
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
