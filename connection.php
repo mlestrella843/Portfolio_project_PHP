@@ -16,6 +16,7 @@
             }
         }
         public function ejecutar($sql) {// This function returns an id depending on the sql instruction passed as a parameter. In this case in an insert. 
+            //Esta funxion te permite Insertar, borrar y actualizar, ya que ejecuta la instruccion y devuelve el id
             $this->connection->exec($sql);
             return $this->connection->lastInsertId();
         }
@@ -25,7 +26,5 @@
             $sentence->execute();
             return $sentence->fetchAll();
         }
-
 }
-
 ?>

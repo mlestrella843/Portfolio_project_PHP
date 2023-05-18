@@ -2,6 +2,7 @@
 <?php include('connection.php');?>
 <?php
 // Aqui se reciben los datos del formulario
+//Ademas de instancia una conexion, se crea una instruccion sql tipo INSERT y se ejecuta.
 if($_POST){    
     print_r($_POST);
     $nameProject = $_POST['nameProject'];
@@ -10,14 +11,20 @@ if($_POST){
     $objConnection->ejecutar($sql);
 }
 
-$objConnection=new connection();
-$projects = $objConnection->consult("SELECT * FROM `proyectos`");
+if($_GET){
+    //instanciamos una conexion.
+    $objConnection=new connection();
+    $id=$_GET['delete'];
+    $sql="DELETE FROM proyectos WHERE `proyectos`.`id`=".$id;
+    $objConnection->ejecutar($sql);
+}
 
-//print_r($projects);
+    $objConnection=new connection();
+    $projects = $objConnection->consult("SELECT * FROM `proyectos`");
+    //print_r($projects);
 ?>
 
 <br/>
-
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -56,11 +63,11 @@ $projects = $objConnection->consult("SELECT * FROM `proyectos`");
                     <tbody>
                       <?php foreach($projects as $project) { ?>
                         <tr>
-                            <td><?php echo $project['id'] ?></td>
-                            <td><?php echo $project['name'] ?></td>
-                            <td><?php echo $project['image'] ?></td>
-                            <td><?php echo $project['description'] ?></td>
-                            <td> <a class="btn btn-danger" href="#">Delete</a></td>
+                            <td><?php echo $project['id']; ?></td>
+                            <td><?php echo $project['name']; ?></td>
+                            <td><?php echo $project['image']; ?></td>
+                            <td><?php echo $project['description']; ?></td>
+                            <td> <a class="btn btn-danger" href="?delete=<?php echo $project['id']; ?>">Delete</a></td>
                         </tr>
                        <?php } ?>
                     </tbody>
@@ -70,7 +77,5 @@ $projects = $objConnection->consult("SELECT * FROM `proyectos`");
         </div>      
     </div>
 </div>
-
-
 
 <?php include('footer.php');  ?>
