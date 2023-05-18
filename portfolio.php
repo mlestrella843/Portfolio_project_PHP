@@ -16,6 +16,9 @@ if($_POST){
     $objConnection=new connection();
     $sql="INSERT INTO `proyectos` (`id`, `name`, `image`, `description`) VALUES (NULL, '$nameProject','$image', '$description');";  
     $objConnection->ejecutar($sql);
+
+    header("location:portfolio.php");
+
 }
 
 if($_GET){
@@ -29,6 +32,8 @@ if($_GET){
   
     $sql="DELETE FROM proyectos WHERE `proyectos`.`id`=".$id;
     $objConnection->ejecutar($sql);
+
+    header("location:portfolio.php");
 
 }
 
@@ -49,12 +54,12 @@ if($_GET){
                 <div class="card-body">          
                     <form action="portfolio.php" method="post" enctype="multipart/form-data">
                         <!-- nameproject es el nombre que entro por teclado, y que se guarda en la columna name de la base de datos-->
-                        Name of project: <input class="form-control" type="text" name="nameProject" id=""> 
+                        Name of project: <input required class="form-control" type="text" name="nameProject" id=""> 
                         <br/>
-                        Image of project: <input class="form-control" type="file" name="file" id="">
+                        Image of project: <input required class="form-control" type="file" name="file" id="">
                         <br/>
                         Description:
-                        <textarea class="form-control" name="description" id="" cols="30" rows="4"></textarea>
+                        <textarea required class="form-control" name="description" id="" cols="30" rows="4"></textarea>
 
                         <input class="btn btn-success" type="submit" value="Send project">
                     </form>
