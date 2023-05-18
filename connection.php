@@ -15,10 +15,17 @@
                 return "Connection failed".$e;
             }
         }
-        public function ejecutar($sql) {
+        public function ejecutar($sql) {// This function returns an id depending on the sql instruction passed as a parameter. In this case in an insert. 
             $this->connection->exec($sql);
             return $this->connection->lastInsertId();
         }
+
+        public function consult($sql){ // this function don't return anything, only allow to consult the information.
+            $sentence=$this->connection->prepare($sql);
+            $sentence->execute();
+            return $sentence->fetchAll();
+        }
+
 }
 
 ?>

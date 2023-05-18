@@ -1,12 +1,19 @@
 <?php include('header.php');?>
 <?php include('connection.php');?>
 <?php
+// Aqui se reciben los datos del formulario
+if($_POST){    
+    print_r($_POST);
+    $nameProject = $_POST['nameProject'];
     $objConnection=new connection();
-
-    $sql="INSERT INTO `proyectos` (`id`, `name`, `image`, `description`) VALUES (NULL, 'We Application 1.', 'application.jpg', 'This is a first Application');";
-    
+    $sql="INSERT INTO `proyectos` (`id`, `name`, `image`, `description`) VALUES (NULL, '$nameProject', 'application.jpg', 'This is a first Application');";  
     $objConnection->ejecutar($sql);
+}
 
+$objConnection=new connection();
+$projects = $objConnection->consult("SELECT * FROM `proyectos`");
+
+//print_r($projects);
 ?>
 
 <br/>
@@ -20,8 +27,9 @@
                     Project Information
                 </div>
                 <div class="card-body">          
-                    <form action="portfolio.php" method="post">
-                        Name of project: <input class="form-control" type="text" name="nameProject" id="">
+                    <form action="portfolio.php" method="post" enctype="multipart/form-data">
+                        <!-- nameproject es el nombre que entro por teclado, y que se guarda en la columna name de la base de datos-->
+                        Name of project: <input class="form-control" type="text" name="nameProject" id=""> 
                         <br/>
                         Image of project: <input class="form-control" type="file" name="file" id="">
                         <br/>
@@ -41,14 +49,20 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Image</th>
+                            <th>Descripcion</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td>3</td>
-                            <td>Web Application</td>
-                            <td>image.jpg</td>
+                      <?php foreach($projects as $project) { ?>
+                        <tr>
+                            <td><?php echo $project['id'] ?></td>
+                            <td><?php echo $project['name'] ?></td>
+                            <td><?php echo $project['image'] ?></td>
+                            <td><?php echo $project['description'] ?></td>
+                            <td> <a class="btn btn-danger" href="#">Delete</a></td>
                         </tr>
+                       <?php } ?>
                     </tbody>
                 </table>
             </div>
