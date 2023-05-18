@@ -4,7 +4,7 @@
 // Aqui se reciben los datos del formulario
 //Ademas de instancia una conexion, se crea una instruccion sql tipo INSERT y se ejecuta.
 if($_POST){    
-    print_r($_POST);
+   // print_r($_POST);
     $nameProject = $_POST['nameProject'];
     $description = $_POST['description'];
    
@@ -55,7 +55,7 @@ if($_GET){
                         <br/>
                         Description:
                         <textarea class="form-control" name="description" id="" cols="30" rows="4"></textarea>
-                        
+
                         <input class="btn btn-success" type="submit" value="Send project">
                     </form>
                 </div>  
@@ -81,7 +81,11 @@ if($_GET){
                         <tr>
                             <td><?php echo $project['id']; ?></td>
                             <td><?php echo $project['name']; ?></td>
-                            <td><?php echo $project['image']; ?></td>
+
+                            <td>                               
+                                <img width="100" src="Images/<?php echo $project['image']; ?>" alt="" srcset="">                               
+                            </td>
+
                             <td><?php echo $project['description']; ?></td>
                             <td> <a class="btn btn-danger" href="?delete=<?php echo $project['id']; ?>">Delete</a></td>
                         </tr>
