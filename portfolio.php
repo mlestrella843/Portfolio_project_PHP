@@ -1,4 +1,13 @@
-<?php  include('header.php');  ?>
+<?php include('header.php');?>
+<?php include('connection.php');?>
+<?php
+    $objConnection=new connection();
+
+    $sql="INSERT INTO `proyectos` (`id`, `name`, `image`, `description`) VALUES (NULL, 'We Application 1.', 'application.jpg', 'This is a first Application');";
+    
+    $objConnection->ejecutar($sql);
+
+?>
 
 <br/>
 
