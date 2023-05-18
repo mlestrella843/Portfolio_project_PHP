@@ -7,7 +7,12 @@ if($_POST){
     print_r($_POST);
     $nameProject = $_POST['nameProject'];
     $description = $_POST['description'];
-    $image= $_FILES['file']['name'];
+   
+    $date = new DateTime();
+    $image= $date->getTimeStamp()."_".$_FILES['file']['name'];
+    $image_temp=$_FILES['file']['tmp_name'];
+    move_uploaded_file($image_temp,"Images/".$image);
+
     $objConnection=new connection();
     $sql="INSERT INTO `proyectos` (`id`, `name`, `image`, `description`) VALUES (NULL, '$nameProject','$image', '$description');";  
     $objConnection->ejecutar($sql);
