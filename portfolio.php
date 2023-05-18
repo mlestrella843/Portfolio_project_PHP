@@ -6,8 +6,10 @@
 if($_POST){    
     print_r($_POST);
     $nameProject = $_POST['nameProject'];
+    $description = $_POST['description'];
+    $image= $_FILES['file']['name'];
     $objConnection=new connection();
-    $sql="INSERT INTO `proyectos` (`id`, `name`, `image`, `description`) VALUES (NULL, '$nameProject', 'application.jpg', 'This is a first Application');";  
+    $sql="INSERT INTO `proyectos` (`id`, `name`, `image`, `description`) VALUES (NULL, '$nameProject','$image', '$description');";  
     $objConnection->ejecutar($sql);
 }
 
@@ -40,6 +42,10 @@ if($_GET){
                         <br/>
                         Image of project: <input class="form-control" type="file" name="file" id="">
                         <br/>
+                        Description:
+                        <textarea class="form-control" name="description" id="" cols="30" rows="4"></textarea>
+
+
                         <input class="btn btn-success" type="submit" value="Send project">
                     </form>
                 </div>  
