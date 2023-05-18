@@ -20,10 +20,16 @@ if($_POST){
 
 if($_GET){
     //instanciamos una conexion.
-    $objConnection=new connection();
     $id=$_GET['delete'];
+    $objConnection=new connection();
+
+    $image=$objConnection->consult("SELECT image FROM `proyectos` WHERE id=".$id);
+
+    unlink("Images/".$image[0]['image']);// aun me queda la duda de porque el indice 0, no seria un valor estatico?
+  
     $sql="DELETE FROM proyectos WHERE `proyectos`.`id`=".$id;
     $objConnection->ejecutar($sql);
+
 }
 
     $objConnection=new connection();
@@ -49,8 +55,7 @@ if($_GET){
                         <br/>
                         Description:
                         <textarea class="form-control" name="description" id="" cols="30" rows="4"></textarea>
-
-
+                        
                         <input class="btn btn-success" type="submit" value="Send project">
                     </form>
                 </div>  
